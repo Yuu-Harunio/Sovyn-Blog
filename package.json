@@ -12,5 +12,8 @@
   "dependencies": {
     "marked": "^15.0.0",
     "gray-matter": "^4.0.3"
+    },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
   }
 }
