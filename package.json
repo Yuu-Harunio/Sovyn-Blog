@@ -1,0 +1,16 @@
+{
+  "name": "sovyn-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "个人知识博客：Obsidian Markdown → 静态站点 → Cloudflare Workers",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && npx wrangler dev",
+    "deploy": "node scripts/build.mjs && npx wrangler deploy"
+  },
+  "dependencies": {
+    "marked": "^15.0.0",
+    "gray-matter": "^4.0.3"
+  }
+}

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设计审查页 · 暖色人文风</title>
+<style>
+/* ============================================================
+   暖色人文风设计系统 · Warm Editorial
+   ============================================================ */
+:root {
+  --bg: #FAF6EF;            /* 奶油底 */
+  --bg-soft: #F3EDE2;       /* 稍深底（区块） */
+  --card: #FFFDF9;          /* 卡片底 */
+  --ink: #3B322A;           /* 主文字 */
+  --ink-soft: #6E6357;      /* 次级文字 */
+  --accent: #C05F2C;        /* 橙棕主色 */
+  --accent-soft: #E8C9B2;   /* 橙浅 */
+  --accent-bg: #F8EBDD;     /* 橙背景 */
+  --line: #E6DCCB;          /* 边框 */
+  --serif: "Noto Serif SC", Georgia, "Songti SC", serif;
+  --sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* ---------- 导航 ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(250,246,239,.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 24px;
+  height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 20px; font-weight: 700;
+  color: var(--ink); text-decoration: none; letter-spacing: .5px;
+}
+.nav-logo em { color: var(--accent); font-style: normal; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  color: var(--ink-soft); text-decoration: none; font-size: 15px;
+  padding: 4px 2px; border-bottom: 2px solid transparent; transition: .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--accent); border-color: var(--accent); }
+
+/* ---------- 通用 ---------- */
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section-label {
+  font-size: 13px; letter-spacing: 3px; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 10px; font-weight: 600;
+}
+.section-title { font-family: var(--serif); font-size: 30px; font-weight: 700; margin-bottom: 36px; }
+.tag {
+  display: inline-block; font-size: 12px; padding: 2px 12px;
+  background: var(--accent-bg); color: var(--accent);
+  border-radius: 999px; text-decoration: none; margin-right: 6px; transition: .2s;
+}
+.tag:hover { background: var(--accent); color: #fff; }
+
+/* ---------- 首页 Hero ---------- */
+.hero { padding: 84px 0 64px; }
+.hero h1 {
+  font-family: var(--serif); font-size: 44px; font-weight: 700;
+  line-height: 1.35; margin-bottom: 18px;
+}
+.hero h1 span { color: var(--accent); }
+.hero p { color: var(--ink-soft); font-size: 17px; max-width: 560px; }
+.hero-meta { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- 文章列表 ---------- */
+.post-list { display: flex; flex-direction: column; gap: 16px; }
+.post-item {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 24px 28px;
+  transition: .2s; text-decoration: none; color: inherit; display: block;
+}
+.post-item:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,95,44,.08); }
+.post-item-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 13px; color: var(--ink-soft); }
+.post-item-top time { font-variant-numeric: tabular-nums; }
+.pinned { color: var(--accent); }
+.post-item h3 { font-family: var(--serif); font-size: 20px; margin-bottom: 6px; }
+.post-item p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.7; }
+
+/* ---------- 文章页布局 ---------- */
+.article-wrap {
+  display: grid;
+  /* 大纲列宽随浏览器收缩：最小 180px，约 22vw，最多 280px（≤ 屏幕的 1/4） */
+  grid-template-columns: minmax(0, 1fr) clamp(180px, 22vw, 280px);
+  gap: 56px;
+  max-width: 1140px; margin: 0 auto; padding: 56px 24px 80px;
+}
+.article-header { grid-column: 1 / -1; margin-bottom: 8px; }
+.article-header .meta { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--ink-soft); margin-bottom: 12px; }
+.article-header h1 { font-family: var(--serif); font-size: 36px; line-height: 1.4; margin-bottom: 14px; }
+.article-divider { border: none; border-top: 1px solid var(--line); margin: 20px 0 40px; }
+
+/* ---------- 正文排版 ---------- */
+.prose h2 {
+  font-family: var(--serif); font-size: 25px; margin: 48px 0 16px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+}
+.prose h3 { font-family: var(--serif); font-size: 20px; margin: 36px 0 12px; }
+.prose p { margin-bottom: 18px; }
+.prose a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed var(--accent-soft); }
+.prose a:hover { border-bottom-style: solid; }
+.prose ul, .prose ol { margin: 0 0 18px 24px; }
+.prose li { margin-bottom: 6px; }
+.prose blockquote {
+  border-left: 3px solid var(--accent); background: var(--accent-bg);
+  padding: 14px 20px; border-radius: 0 10px 10px 0; margin: 0 0 18px;
+  color: var(--ink-soft);
+}
+.prose code:not(pre code) {
+  font-family: var(--mono); font-size: .86em; background: var(--bg-soft);
+  padding: 2px 7px; border-radius: 6px; color: var(--accent);
+}
+.prose img {
+  max-width: 100%; border-radius: var(--radius);
+  border: 1px solid var(--line); display: block; margin: 8px 0 4px;
+}
+.fig-caption { font-size: 13px; color: var(--ink-soft); text-align: center; margin-bottom: 20px; }
+.prose table { border-collapse: collapse; width: 100%; margin-bottom: 20px; font-size: 14.5px; }
+.prose th, .prose td { border: 1px solid var(--line); padding: 9px 14px; text-align: left; }
+.prose th { background: var(--bg-soft); font-weight: 600; }
+.prose hr { border: none; border-top: 1px solid var(--line); margin: 36px 0; }
+
+/* ---------- TOC 大纲（右侧栏，正文在左） ---------- */
+.toc { grid-column: 2; grid-row: 2; position: sticky; top: 84px; align-self: start; }
+.prose { grid-column: 1; grid-row: 2; }
+.toc-title { font-size: 13px; letter-spacing: 2px; color: var(--ink-soft); font-weight: 600; margin-bottom: 12px; }
+.toc a {
+  display: block; text-decoration: none; color: var(--ink-soft);
+  font-size: 13.5px; padding: 5px 0 5px 14px; border-left: 2px solid var(--line);
+  transition: .15s; line-height: 1.5;
+}
+.toc a.lvl3 { padding-left: 30px; font-size: 13px; }
+.toc a:hover { color: var(--accent); border-left-color: var(--accent); }
+.toc a.current { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+
+/* ---------- Callout ---------- */
+.callout {
+  border-radius: 10px; padding: 14px 18px; margin: 0 0 18px;
+  border: 1px solid; display: flex; gap: 12px; font-size: 15px; line-height: 1.7;
+}
+.callout-icon { font-size: 17px; flex-shrink: 0; }
+.callout-title { font-weight: 600; margin-bottom: 2px; }
+.callout p { margin: 0; }
+.callout-note { background: #EEF2F7; border-color: #C8D4E4; color: #33465E; }
+.callout-tip { background: #EAF3EC; border-color: #C2DCc9; color: #2F5B3C; }
+.callout-warn { background: #FBF0E4; border-color: #EBD3AF; color: #7A5518; }
+
+/* ---------- 代码块 + 复制 ---------- */
+.code-block { margin: 0 0 20px; border-radius: 10px; overflow: hidden; border: 1px solid #38302A; }
+.code-head {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #2A231E; padding: 7px 14px;
+}
+.code-lang { font-size: 12px; color: #A79582; letter-spacing: 1px; text-transform: uppercase; font-family: var(--mono); }
+.copy-btn {
+  font-size: 12px; font-family: var(--sans); color: #C9b8a6;
+  background: transparent; border: 1px solid #564840; border-radius: 6px;
+  padding: 3px 12px; cursor: pointer; transition: .2s; display: flex; align-items: center; gap: 5px;
+}
+.copy-btn:hover { color: #fff; border-color: var(--accent); }
+.copy-btn.copied { color: #7FBF8E; border-color: #7FBF8E; }
+.code-block pre {
+  background: #211B16; padding: 16px 18px; overflow-x: auto;
+  font-family: var(--mono); font-size: 13.5px; line-height: 1.75; color: #E8DCCF;
+}
+.code-block pre code { font-family: inherit; }
+.tok-kw { color: #D98E73; }
+.tok-str { color: #A3BE8C; }
+.tok-com { color: #7d6f63; font-style: italic; }
+.tok-fn { color: #E5C07B; }
+
+/* ---------- 双链 ---------- */
+.wikilink {
+  color: var(--accent); text-decoration: none;
+  background: linear-gradient(transparent 65%, var(--accent-soft) 65%);
+  padding: 0 2px; border-radius: 2px; transition: .15s;
+}
+.wikilink:hover { background: var(--accent); color: #fff; }
+.wikilink-dead { color: var(--ink-soft); border-bottom: 1px dotted var(--ink-soft); cursor: help; }
+
+/* ---------- 引用卡片（![[笔记]] 降级） ---------- */
+.embed-card {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: 10px; padding: 16px 20px; margin: 0 0 20px; transition: .2s;
+}
+.embed-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(192,95,44,.1); transform: translateY(-1px); }
+.embed-card .embed-label { font-size: 11.5px; letter-spacing: 2px; color: var(--accent); margin-bottom: 5px; }
+.embed-card .embed-title { font-family: var(--serif); font-weight: 700; font-size: 16.5px; margin-bottom: 4px; }
+.embed-card .embed-summary { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+
+/* ---------- 文末相关文章（作者手写链接列表） ---------- */
+.related-posts { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+.related-posts .rp-title { font-family: var(--serif); font-size: 17px; margin-bottom: 12px; }
+.related-posts ul { list-style: none; margin-left: 0; }
+.related-posts li { margin-bottom: 8px; }
+.related-posts a { font-size: 15px; }
+.related-posts time { font-size: 12.5px; color: var(--ink-soft); margin-left: 8px; }
+
+/* ---------- 分隔演示标注 ---------- */
+.demo-divider {
+  max-width: 1140px; margin: 30px auto 0; text-align: center;
+  color: var(--ink-soft); font-size: 13px; letter-spacing: 4px;
+}
+.demo-divider::before, .demo-divider::after { content: "—— "; }
+.demo-divider::after { content: " ——"; }
+
+/* ---------- 页脚 ---------- */
+footer {
+  border-top: 1px solid var(--line); padding: 36px 0; margin-top: 40px;
+  background: var(--bg-soft);
+}
+.footer-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; color: var(--ink-soft); flex-wrap: wrap; gap: 12px;
+}
+.footer-inner a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px dashed var(--line); }
+.footer-inner a:hover { color: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 860px) {
+  .article-wrap { grid-template-columns: 1fr; }
+  .toc { display: none; } /* 移动端折叠大纲（正式版做成可展开） */
+  .hero h1 { font-size: 34px; }
+  .article-header h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 组件 1：导航栏 ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Yanzi<em>.</em></a>
+    <div class="nav-links">
+      <a href="#" class="active">首页</a>
+      <a href="#">标签</a>
+      <a href="#">文章总览</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ 组件 2：首页 · 个人介绍区 ============ -->
+<header class="hero container">
+  <div class="section-label">个人博客</div>
+  <h1>记录与思考，<br>把知识<span>留在自己手里</span>。</h1>
+  <p>这里是我的个人知识库，从 Obsidian 而来。写作、代码、读书笔记与随想，全部以 Markdown 沉淀，双向链接彼此连接。</p>
+  <div class="hero-meta">
+    <a class="tag" href="#"># 笔记</a>
+    <a class="tag" href="#"># 编程</a>
+    <a class="tag" href="#"># 随笔</a>
+  </div>
+</header>
+
+<!-- ============ 组件 3：首页 · 文章列表 ============ -->
+<main class="container" style="padding-bottom: 56px;">
+  <div class="section-label">文章</div>
+  <h2 class="section-title">最新发布</h2>
+  <div class="post-list">
+    <a class="post-item" href="#">
+      <div class="post-item-top">
+        <span class="pinned">置顶</span>
+        <time>2026-08-28</time>
+        <span>·</span>
+        <span class="tag" style="margin:0;">Cloudflare</span>
+        <span class="tag" style="margin:0;">部署</span>
+      </div>
+      <h3>用 Cloudflare Workers 免费托管个人博客的完整实践</h3>
+      <p>零成本、零服务器、零登录。从域名绑定到自动部署，一篇讲清楚纯静态博客的上线全流程……</p>
+    </a>
+    <a class="post-item" href="#">
+      <div class="post-item-top">
+        <time>2026-08-20</time>
+        <span>·</span>
+        <span class="tag" style="margin:0;">Obsidian</span>
+      </div>
+      <h3>把 Obsidian 知识库发布成博客：双链的网页呈现</h3>
+      <p>当 [[双向链接]] 遇到公开网页，反向引用如何构建一张可以漫游的知识网络……</p>
+    </a>
+    <a class="post-item" href="#">
+      <div class="post-item-top">
+        <time>2026-08-11</time>
+        <span>·</span>
+        <span class="tag" style="margin:0;">JavaScript</span>
+      </div>
+      <h3>15 行原生 JS 实现代码块一键复制</h3>
+      <p>Clipboard API 加一点状态反馈，不需要任何依赖库……</p>
+    </a>
+  </div>
+</main>
+
+<div class="demo-divider">以上为首页 · 以下为文章页</div>
+
+<!-- ============ 组件 4：文章页 ============ -->
+<div class="article-wrap">
+
+  <!-- 文章头部 -->
+  <header class="article-header">
+    <div class="meta">
+      <time>2026-08-28</time>
+      <span>·</span>
+      <span>约 8 分钟</span>
+      <span>·</span>
+      <span class="tag">Cloudflare</span>
+      <span class="tag">部署</span>
+    </div>
+    <h1>用 Cloudflare Workers 免费托管个人博客的完整实践</h1>
+    <hr class="article-divider">
+  </header>
+
+  <!-- 组件 5：TOC 大纲（sticky 侧栏） -->
+  <aside class="toc">
+    <div class="toc-title">大纲</div>
+    <a href="#s1" class="current">1. 为什么选 Workers</a>
+    <a href="#s2">2. 配置静态资源</a>
+    <a href="#s3" class="lvl3">2.1 wrangler.jsonc</a>
+    <a href="#s4" class="lvl3">2.2 目录结构</a>
+    <a href="#s5">3. 绑定域名</a>
+    <a href="#s6">4. 自动部署</a>
+  </aside>
+
+  <!-- 正文 -->
+  <article class="prose">
+
+    <h2 id="s1">1. 为什么选 Workers</h2>
+    <p>Cloudflare Workers 的静态资源托管对个人博客来说绰绰有余：免费额度 <code>100,000 请求/天</code>，无需绑定付款方式，全球 CDN 直出。相关概念可以参考 <a class="wikilink" href="#">Cloudflare 免费额度详解</a>这篇笔记（这是 <code>[[双向链接]]</code> 的效果），而 <span class="wikilink-dead" title="该笔记未公开发布">D1 数据库选型</span> 是一篇未发布的笔记（降级为虚线纯文本，悬停有提示）。</p>
+
+    <blockquote>静态站点 + CDN 直出 = 响应速度的上限就是物理极限。没有渲染、没有查询、没有登录。</blockquote>
+
+    <div class="callout callout-note">
+      <span class="callout-icon">ℹ️</span>
+      <div><div class="callout-title">笔记 · Obsidian callout 语法</div><p>这是 <code>&gt; [!note]</code> 渲染出来的效果，构建时自动转换样式。</p></div>
+    </div>
+
+    <h2 id="s2">2. 配置静态资源</h2>
+    <p>核心就一个配置文件，把构建产物 <code>dist/</code> 指给 Worker：</p>
+
+    <!-- 组件 6：代码块 + 复制按钮 -->
+    <div class="code-block">
+      <div class="code-head">
+        <span class="code-lang">wrangler.jsonc</span>
+        <button class="copy-btn" onclick="copyCode(this)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>复制</span>
+        </button>
+      </div>
+      <pre><code>{
+  <span class="tok-kw">"name"</span>: <span class="tok-str">"my-blog"</span>,
+  <span class="tok-kw">"compatibility_date"</span>: <span class="tok-str">"2026-08-28"</span>,
+  <span class="tok-kw">"assets"</span>: {
+    <span class="tok-kw">"directory"</span>: <span class="tok-str">"./dist"</span>,      <span class="tok-com">// 构建产物目录</span>
+    <span class="tok-kw">"not_found_handling"</span>: <span class="tok-str">"404-page"</span> <span class="tok-com">// 找不到时返回 404 页</span>
+  }
+}</code></pre>
+    </div>
+
+    <h3 id="s3">2.1 wrangler.jsonc</h3>
+    <p>不需要写任何 Worker 代码，纯静态资源模式下 Workers 直接当文件服务器用。点击代码块右上角的 <code>复制</code> 按钮可以体验一键复制功能。</p>
+
+    <div class="code-block">
+      <div class="code-head">
+        <span class="code-lang">bash</span>
+        <button class="copy-btn" onclick="copyCode(this)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>复制</span>
+        </button>
+      </div>
+      <pre><code><span class="tok-com"># 构建并部署，两条命令上线</span>
+npm run build
+npx wrangler deploy</code></pre>
+    </div>
+
+    <h3 id="s4">2.2 目录结构</h3>
+    <table>
+      <thead><tr><th>目录</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>content/</code></td><td>Obsidian 拷入的 Markdown 原文</td></tr>
+        <tr><td><code>content/assets/</code></td><td>笔记引用的图片附件</td></tr>
+        <tr><td><code>templates/</code></td><td>手写 HTML 模板</td></tr>
+        <tr><td><code>dist/</code></td><td>构建产物（部署这个）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">💡</span>
+      <div><div class="callout-title">提示 · [!tip]</div><p>frontmatter 写上 <code>publish: true</code> 的笔记才会被构建为公开页面，其余静默忽略。</p></div>
+    </div>
+
+    <h2 id="s5">3. 绑定域名</h2>
+    <p>域名已经在 Cloudflare 上，Worker 里直接添加自定义域即可，几分钟生效。注意国内读者长期大量访问的备案问题：</p>
+
+    <!-- 组件 7：图片（![[图片.png]] 渲染效果） -->
+    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=minimal%20warm%20illustration%20of%20a%20personal%20blog%20dashboard%2C%20cream%20background%2C%20soft%20orange%20accents%2C%20clean%20editorial%20style%2C%20serif%20typography%2C%20cozy%20reading%20atmosphere&image_size=landscape_16_9" alt="文章配图示例">
+    <p class="fig-caption">文章配图：<code>![[screenshot.png]]</code> 的渲染效果</p>
+
+    <!-- 组件 8：引用卡片（![[笔记]] 降级效果） -->
+    <a class="embed-card" href="#">
+      <div class="embed-label">嵌入笔记 · EMBED</div>
+      <div class="embed-title">把 Obsidian 知识库发布成博客</div>
+      <div class="embed-summary">这是 <code>![[另一篇笔记]]</code> 的降级渲染：不重复展开内容，而是显示标题、摘要和跳转链接的引用卡片……</div>
+    </a>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠️</span>
+      <div><div class="callout-title">注意 · [!warning]</div><p>删除源笔记后，引用它的双链会在下次构建时自动降级为纯文本，不会出现死链。</p></div>
+    </div>
+
+    <h2 id="s6">4. 自动部署</h2>
+    <p>GitHub Actions 配好后，写文章的完整流程是：Obsidian 里写完 → 拷进 <code>content/</code> 加上 frontmatter → <code>git push</code>。几十秒后文章就自动上线了。</p>
+    <hr>
+    <p style="color:var(--ink-soft); font-size:14px;">本文标签：<a href="#" style="border:none">#Cloudflare</a> · <a href="#" style="border:none">#部署</a> · <a href="#" style="border:none">#Workers</a></p>
+
+    <!-- 文末相关文章：作者在 Markdown 里手写的 [[链接]] 列表 -->
+    <div class="related-posts">
+      <div class="rp-title">相关文章</div>
+      <ul>
+        <li><a class="wikilink" href="#">把 Obsidian 知识库发布成博客：双链的网页呈现</a><time>2026-08-20</time></li>
+        <li><a class="wikilink" href="#">2026 年个人建站方案盘点</a><time>2026-07-15</time></li>
+      </ul>
+    </div>
+  </article>
+
+</div>
+
+<!-- ============ 组件 10：页脚 ============ -->
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 Yanzi · 用 ❤ 与 Markdown 写成</span>
+    <span>
+      <a href="#">GitHub</a> · <a href="#">关于</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+// 代码块一键复制（正式版逻辑与此一致）
+function copyCode(btn) {
+  const code = btn.closest('.code-block').querySelector('pre').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const label = btn.querySelector('span');
+    btn.classList.add('copied');
+    label.textContent = '已复制';
+    setTimeout(() => { btn.classList.remove('copied'); label.textContent = '复制'; }, 1600);
+  });
+}
+// TOC 滚动高亮（演示：点击切换 current）
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.toc a').forEach(x => x.classList.remove('current'));
+    a.classList.add('current');
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>

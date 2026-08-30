@@ -1,0 +1,11 @@
+{
+  // Cloudflare Worker 静态资源托管配置（免费计划，无需绑卡）
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sovyn-blog",
+  "compatibility_date": "2026-08-30",
+  "assets": {
+    "directory": "./dist",
+    // 找不到路径时返回 404.html
+    "not_found_handling": "404-page"
+  }
+}

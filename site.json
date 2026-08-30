@@ -1,0 +1,17 @@
+{
+  "title": "Yanzi.",
+  "author": "Yanzi",
+  "description": "记录与思考，把知识留在自己手里。从 Obsidian 而来的个人知识库。",
+  "url": "https://example.com",
+  "hero": {
+    "heading": "记录与思考，<br>把知识<span>留在自己手里</span>。",
+    "intro": "这里是我的个人知识库，从 Obsidian 而来。写作、代码、读书笔记与随想，全部以 Markdown 沉淀，双向链接彼此连接。",
+    "tags": ["笔记", "编程", "随笔"]
+  },
+  "footer": {
+    "left": "© 2026 Yanzi · 用 ❤ 与 Markdown 写成",
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/" }
+    ]
+  }
+}
