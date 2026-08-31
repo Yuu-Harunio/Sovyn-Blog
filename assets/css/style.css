@@ -55,7 +55,9 @@ body > nav, body > footer { flex-shrink: 0; }
 .nav-links a:hover, .nav-links a.active { color: var(--accent); border-color: var(--accent); }
 
 /* ---------- 通用 ---------- */
-.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+/* 注意：body 是 flex 纵向容器，这里的 auto 只能写在左右（水平居中），
+   写成 margin: 0 auto 会让垂直方向的 auto 把区块推到页面中间 */
+.container { max-width: 1080px; margin-left: auto; margin-right: auto; padding: 0 24px; }
 .section-label {
   font-size: 13px; letter-spacing: 3px; color: var(--accent);
   text-transform: uppercase; margin-bottom: 10px; font-weight: 600;
@@ -68,8 +70,13 @@ body > nav, body > footer { flex-shrink: 0; }
 }
 .tag:hover { background: var(--accent); color: #fff; }
 
-/* ---------- 首页 Hero ---------- */
-.hero { padding: 84px 0 64px; }
+/* ---------- 首页 Hero：左文右图 ---------- */
+.hero {
+  padding: 84px 0 64px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(280px, 32vw, 400px);
+  gap: 64px; align-items: center;
+}
 .hero h1 {
   font-family: var(--serif); font-size: 44px; font-weight: 700;
   line-height: 1.35; margin-bottom: 18px;
@@ -77,6 +84,11 @@ body > nav, body > footer { flex-shrink: 0; }
 .hero h1 span { color: var(--accent); }
 .hero p { color: var(--ink-soft); font-size: 17px; max-width: 560px; }
 .hero-meta { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-art {
+  width: 100%; display: block;
+  border-radius: var(--radius); border: 1px solid var(--line);
+  box-shadow: 0 16px 40px rgba(59,50,42,.12);
+}
 
 /* ---------- 文章列表 ---------- */
 .post-list { display: flex; flex-direction: column; gap: 16px; }
@@ -98,7 +110,7 @@ body > nav, body > footer { flex-shrink: 0; }
   /* 大纲列宽随浏览器收缩：最小 180px，约 22vw，最大 280px（≤ 屏幕 1/4） */
   grid-template-columns: minmax(0, 1fr) clamp(180px, 22vw, 280px);
   gap: 56px;
-  max-width: 1140px; margin: 0 auto; padding: 56px 24px 80px;
+  max-width: 1140px; margin-left: auto; margin-right: auto; padding: 56px 24px 80px;
 }
 .article-header { grid-column: 1 / -1; margin-bottom: 8px; }
 .article-header .meta { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--ink-soft); margin-bottom: 12px; flex-wrap: wrap; }
@@ -290,6 +302,8 @@ footer {
 @media (max-width: 860px) {
   .article-wrap { grid-template-columns: 1fr; }
   .toc { display: none; } /* 移动端隐藏大纲（后续可改为折叠） */
+  .hero { grid-template-columns: 1fr; gap: 36px; padding: 56px 0 48px; }
+  .hero-art { max-width: 380px; margin: 0 auto; }
   .hero h1 { font-size: 34px; }
   .article-header h1 { font-size: 28px; }
   .nav-links { gap: 18px; }

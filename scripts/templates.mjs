@@ -59,16 +59,22 @@ ${content}
 </html>`;
 }
 
-// 首页 Hero 区
+// 首页 Hero 区：左文右图（site.json 配置 hero.image 后显示插图）
 export function heroHtml(site) {
   const h = site.hero || {};
   const tags = (h.tags || []).map(t =>
     `<a class="tag" href="/tags/${encodeURIComponent(t)}/"># ${escapeHtml(t)}</a>`).join('');
+  const art = h.image
+    ? `<img class="hero-art" src="${h.image}" alt="${escapeHtml(h.alt || '博客封面插图')}">`
+    : '';
   return `<header class="hero container">
-  <div class="section-label">个人博客</div>
-  <h1>${h.heading || ''}</h1>
-  <p>${escapeHtml(h.intro || '')}</p>
-  <div class="hero-meta">${tags}</div>
+  <div class="hero-text">
+    <div class="section-label">个人博客</div>
+    <h1>${h.heading || ''}</h1>
+    <p>${escapeHtml(h.intro || '')}</p>
+    <div class="hero-meta">${tags}</div>
+  </div>
+  ${art}
 </header>`;
 }
 
