@@ -91,6 +91,28 @@ export function postListHtml(posts) {
   return `<div class="post-list">${posts.map(postItemHtml).join('\n')}</div>`;
 }
 
+// 总览页网格卡片：带 data-* 属性供站内搜索过滤（标题/标签/摘要）
+export function postCardHtml(post) {
+  const tagHtml = (post.tags || []).slice(0, 3).map(t =>
+    `<span class="tag">${escapeHtml(t)}</span>`).join(' ');
+  return `<a class="post-item post-card" href="${post.url}"
+  data-title="${escapeHtml(post.title)}"
+  data-tags="${escapeHtml((post.tags || []).join(' '))}"
+  data-summary="${escapeHtml(post.summary || '')}">
+  <div class="post-item-top">
+    ${post.pinned ? '<span class="pinned">置顶</span>' : ''}
+    <time>${escapeHtml(post.date)}</time>
+  </div>
+  <h3>${escapeHtml(post.title)}</h3>
+  ${post.summary ? `<p>${escapeHtml(post.summary)}</p>` : ''}
+  ${tagHtml ? `<div class="post-card-tags">${tagHtml}</div>` : ''}
+</a>`;
+}
+
+export function postGridHtml(posts) {
+  return `<div class="post-grid">${posts.map(postCardHtml).join('\n')}</div>`;
+}
+
 // 文章页：正文在左、TOC 大纲在右（sticky）
 export function articlePageHtml(post, tocHtml) {
   const tagHtml = (post.tags || []).map(t =>
@@ -161,7 +183,7 @@ export function pageShell({ label, title, inner }) {
 </main>`;
 }
 
-// 归档页：按年分组
+// 归档页：搜索框 + 按年分组的 4 列卡片网格
 export function archiveHtml(posts) {
   const years = new Map();
   for (const p of posts) {
@@ -171,8 +193,12 @@ export function archiveHtml(posts) {
   }
   const blocks = [...years.entries()].map(([y, list]) => `
   <h3 class="archive-year">${escapeHtml(y)}</h3>
-  ${postListHtml(list)}`).join('\n');
-  return blocks;
+  ${postGridHtml(list)}`).join('\n');
+  return `<div class="search-box">
+  <input type="search" id="site-search" placeholder="搜索文章：标题 / 标签 / 摘要…" autocomplete="off">
+  <span class="search-count" id="search-count"></span>
+</div>
+<div id="archive-list">${blocks}</div>`;
 }
 
 // 标签索引：标签 + 数量

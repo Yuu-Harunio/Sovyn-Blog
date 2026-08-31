@@ -48,8 +48,9 @@ Sovyn/
 │   ├── posts/                          # 文章目录（每篇一个 .md）
 │   │   ├── hello-world.md              #   示例：置顶 + callout + 双链
 │   │   ├── cloudflare-workers-hosting.md #   示例：代码块 + 表格
-│   │   └── obsidian-workflow.md        #   示例：图片嵌入 + 引用卡片 + 降级双链
-│   ├── assets/                         # 文章引用的图片附件（构建时拷到 /assets/img/）
+│   │   ├── obsidian-workflow.md        #   示例：图片嵌入 + 引用卡片 + 降级双链
+│   │   └── 笔记名.assets/              #   Typora 图片文件夹（与 .md 同名，整体拷贝）
+│   ├── assets/                         # 图片附件的另一种放法（构建时统一拷到 /assets/img/）
 │   │   └── diagram.svg
 │   └── about.md                        # 关于页内容（不需要 publish 字段，始终构建）
 │
@@ -95,10 +96,10 @@ Sovyn/
 | 导出函数 | 产出 |
 | :--- | :--- |
 | `layout(site, opts)` | 页面骨架：head / 导航（首页·标签·文章总览）/ 页脚。`active` 参数控制导航高亮 |
-| `heroHtml` / `postItemHtml` / `postListHtml` | 首页 Hero 区、文章卡片列表 |
+| `heroHtml` / `postItemHtml` / `postListHtml` / `postCardHtml` / `postGridHtml` | 首页 Hero 区、列表卡片、总览页 4 列网格卡片（带 data-* 供搜索过滤） |
 | `articlePageHtml(post, tocHtml)` | 文章页网格：正文左 + TOC 右（sticky），与 design-preview 定稿一致 |
 | `embedCardHtml` / `calloutHtml` | 引用卡片 / callout 卡片（8 种类型 → 3 种配色） |
-| `archiveHtml` / `tagIndexHtml` / `aboutPageHtml` / `notFoundHtml` | 总览页（按年分组）/ 标签云 / 关于页 / 404 |
+| `archiveHtml` / `tagIndexHtml` / `aboutPageHtml` / `notFoundHtml` | 总览页（搜索框 + 按年分组网格）/ 标签云 / 关于页 / 404 |
 
 ---
 
@@ -115,9 +116,9 @@ Sovyn/
 | `/archive/` | 全部文章按年分组 | `buildArchivePage` |
 | `/about/` | content/about.md | `buildAboutPage` |
 | `/404.html` | — | `notFoundHtml`（wrangler `not_found_handling`） |
-| `/feed.xml` `/sitemap.xml` `/search.json` | 全部文章 | `buildFeed` / `buildSitemap`（search.json 为未来搜索功能预留的数据源） |
+| `/feed.xml` `/sitemap.xml` `/search.json` | 全部文章 | `buildFeed` / `buildSitemap`（search.json 在浏览器端被 site.js 消费：总览页搜索过滤 + 首页随机推荐） |
 | `/assets/css/` `/assets/js/` | assets/ 目录 | 原样拷贝 |
-| `/assets/img/` | content/assets/ | 原样拷贝（文章图片附件） |
+| `/assets/img/` | content/ 下所有图片（含「笔记名.assets」） | 平铺拷贝，同名自动加目录前缀 |
 
 ---
 
@@ -147,7 +148,8 @@ Sovyn/
 | `[[笔记名]]` | 站内链接（橙色渐变高亮） | `wikilinkHtml` |
 | `[[笔记名\|别名]]` | 显示别名，跳转目标不变 | `wikilinkHtml` |
 | `[[未发布笔记]]` | 虚线纯文本，悬停提示"该笔记未公开发布" | `wikilinkHtml` |
-| `![[图片名.png]]` | `<img>`，按文件名全局索引定位（无论在 assets 哪个子目录） | `embedReplacer` |
+| `![[图片名.png]]` | `<img>`，按文件名全局索引定位（无论图片在哪个目录） | `embedReplacer` |
+| `![](笔记名.assets/x.png)` | 标准 md 图片语法，按 md 所在目录解析相对路径（Typora 兼容） | `mdImageReplacer` |
 | `![[笔记名]]` | 引用卡片（标题 + 摘要 + 链接），**不**展开对方内容 | `embedCardHtml` |
 | `> [!note/tip/warning/...]` | 配色卡片（note/info/question/quote → 蓝，tip/hint → 绿，warning/caution → 橙黄） | `transformCallouts` + `calloutHtml` |
 | `#标签` | 可点击标签，跳转标签聚合页 | `transformInline` 正则 |
@@ -165,7 +167,7 @@ Sovyn/
 
 ### 场景 2：`![[图片]]` 不显示
 
-1. 图片文件是否在 `content/assets/`（任意子目录均可）
+1. 图片文件是否在 `content/` 下（`.assets` 文件夹或 `content/assets/`）
 2. 引用名是否与文件名（带或不带扩展名）一致
 3. 构建产物里是否有该文件：`dist/assets/img/`
 
@@ -198,7 +200,7 @@ Sovyn/
 ### 新增一篇文章
 
 1. 拷贝 .md 到 `content/posts/`，frontmatter 写：title / date / tags / summary / `publish: true`（可选 pinned / aliases / slug）
-2. 图片附件放 `content/assets/`
+2. 图片附件放 `content/assets/` 或与 .md 同名的 `.assets` 文件夹
 3. `git push` → Actions 自动构建部署
 
 ### 新增一个页面类型（如"读书"页）
@@ -231,6 +233,6 @@ Sovyn/
 
 ---
 
-**文档版本：** v1.0
+**文档版本：** v1.1（v1.1：Typora `.assets` 图片支持、首页最新 3 篇 + 随机推荐、总览页 4 列网格 + 站内搜索）
 **最后更新：** 2026-08-30
 **维护者：** Yanzi
