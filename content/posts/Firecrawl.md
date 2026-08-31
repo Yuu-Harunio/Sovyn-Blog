@@ -1,7 +1,7 @@
 ---
 title: Firecrawl
 date: 2026-08-22
-tags: [agent-skill, 爬虫, 网页数据, OpenCode]
+tags: [Firecrawl, 编程, Agent]
 summary: Firecrawl 是一个开源的网页数据抓取与提取 API，可将整个网站转换为 LLM 就绪的 Markdown 或结构化数据，适合 AI 知识库构建、竞品监控和自动化研究。
 publish: true
 ---

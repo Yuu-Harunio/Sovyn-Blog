@@ -1,7 +1,7 @@
 ---
 title: 编程小白的 Hermes Agent 培养手册（从 0 到全栈工程师）
 date: 2026-08-23
-tags: [手册, Hermes, Agent, Skill-Fact-Memory, 编程教学, Obsidian]
+tags: [Hermes, 编程, Agent]
 summary: 面向编程零基础用户的 Hermes Agent 培养手册，基于 Skill / Fact / Memory 三元组认知架构，从降噪、搭建 Skill 体系、接入 Obsidian 事实体系、建立 Memory 体系到串联自动化的六阶段路线图，最终走向全栈工程师与远期图数据库升级。
 publish: true
 ---

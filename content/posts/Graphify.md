@@ -1,7 +1,7 @@
 ---
 title: Graphify
 date: 2026-08-22
-tags: [agent-skill, 知识图谱, 代码可视化, OpenCode]
+tags: [Graphify, 编程, Agent]
 summary: Graphify 是一个将任意文件夹（代码、文档等）转化为可导航知识图谱的工具，生成 HTML 可视化、GraphRAG 可用的 JSON 与自然语言报告。它比 MAP 更进一步，定位用图、落地读码，适合 AI Agent 对项目进行迭代与维护。
 publish: true
 ---

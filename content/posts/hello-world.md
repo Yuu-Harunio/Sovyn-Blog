@@ -3,8 +3,8 @@ title: 博客上线：从 Obsidian 到自己的域名
 date: 2026-08-28
 tags: [随笔, 建站]
 summary: 这个博客是什么、为什么做、怎么运作的。一篇说明一切的开工宣言。
-publish: true
-pinned: true
+publish: false
+pinned: false
 ---
 
 ## 为什么要自己搭一个博客

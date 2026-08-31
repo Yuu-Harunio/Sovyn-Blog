@@ -1,7 +1,7 @@
 ---
 title: Docker 从零到上手：新手小白教程
 date: 2026-08-23
-tags: [教程, Docker, 容器化, 后端, 工具]
+tags: [Docker, 编程, WSL]
 summary: Docker 零基础教程：讲解镜像、容器、仓库三大核心概念，安装方法，常用命令速查，Dockerfile 定制镜像与使用技巧。是外卖系统等项目使用容器化开发环境的基础。
 publish: true
 ---

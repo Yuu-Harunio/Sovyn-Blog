@@ -1,7 +1,7 @@
 ---
 title: Kali Linux 三路部署与无线安全实战（WSL + Ventoy 可移动 U 盘 + WiFi 抓包）
 date: 2026-08-30
-tags: [教程, Kali, WSL, Ventoy, 无线安全]
+tags: [Kali, 编程, WSL]
 summary: 本文记录三条 Kali 部署与使用路线：1）在 WSL 中安装 Kali 并配置 Win-Kex 可视化桌面与中文环境；2）利用 Ventoy 制作包含启动盘与系统盘的 U 盘可移动 Kali 物理系统；3）在物理机上利用内置无线网卡进行 WiFi 监听、握手包抓取与密码破解。WSL 基础安装部分引用「WSL：下载与配置完全指南」。
 publish: true
 ---

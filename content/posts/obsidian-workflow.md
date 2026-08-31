@@ -3,7 +3,7 @@ title: Obsidian 工作流：从笔记到网页
 date: 2026-08-20
 tags: [Obsidian, 建站]
 summary: 保持 Obsidian 原生写法不动，构建器负责把双链、嵌入、callout 转换成网页元素。
-publish: true
+publish: false
 ---
 
 ## 原则：笔记不动，构建器来适配

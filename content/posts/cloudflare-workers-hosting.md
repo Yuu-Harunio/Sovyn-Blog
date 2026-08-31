@@ -3,7 +3,7 @@ title: Cloudflare Workers 托管静态博客的实践
 date: 2026-08-26
 tags: [Cloudflare, 部署]
 summary: 零成本、零服务器、零登录。用 Workers 静态资源托管跑一个纯静态博客的全部要点。
-publish: true
+publish: false
 ---
 
 ## 为什么选 Workers 静态资源托管

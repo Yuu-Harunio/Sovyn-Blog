@@ -1,7 +1,7 @@
 ---
 title: GitHub 使用教程（小白版）
 date: 2026-08-23
-tags: [教程, Git, GitHub, 版本控制, 工具]
+tags: [Git, 编程, GitHub]
 summary: 面向零基础用户，讲解如何注册 GitHub、安装配置 Git、将本地项目上传到远程仓库，并附常用 Git 命令清单与常见问题排障。它是本知识库多个 Skill 文档共同依赖的基础工具教程。
 publish: true
 ---

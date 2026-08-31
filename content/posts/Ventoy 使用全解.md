@@ -1,7 +1,7 @@
 ---
 title: Ventoy 使用全解：一个 U 盘装遍所有系统
 date: 2026-08-28
-tags: [教程, Ventoy, 启动盘, 多系统, U盘工具]
+tags: [Ventoy, 工具, Kali]
 summary: Ventoy 是一款开源免费的多系统启动盘制作工具，支持 ISO/WIM/IMG/VHD/EFI 等多种镜像格式，一次安装后无需反复格式化 U 盘，只需拷贝镜像文件即可启动。本文覆盖 Ventoy 的下载、安装、使用、高级功能（插件/主题/自动安装）及常见问题解决，是「Kali Linux 三路部署与无线安全实战」中 Ventoy 部分的完整展开。
 publish: true
 ---

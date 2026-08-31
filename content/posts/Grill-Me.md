@@ -1,7 +1,7 @@
 ---
 title: grill-me
 date: 2026-08-22
-tags: [agent-skill, 需求澄清, 访谈, OpenCode]
+tags: [Grill-Me, 编程, Agent]
 summary: grill-me 是 Matt Pocock 技能套件中的核心技能，在写任何代码之前通过系统性访谈式追问，彻底澄清需求与设计决策，生成可执行的设计总结。它把「先思考再行动」标准化、可复用化。
 publish: true
 ---

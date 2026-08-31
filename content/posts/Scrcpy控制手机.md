@@ -1,7 +1,7 @@
 ---
 title: Scrcpy 控制手机
 date: 2026-08-23
-tags: [教程, 手机投屏, adb, 工具]
+tags: [Scrcpy, 工具, 手机投屏]
 summary: 使用 Scrcpy 通过 USB 一次激活无线调试端口，之后即可用纯 Wi-Fi 将手机屏幕投射到电脑，并用键盘快捷键控制。附完整操作步骤与快捷键表。
 publish: true
 ---

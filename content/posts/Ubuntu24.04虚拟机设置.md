@@ -1,7 +1,7 @@
 ---
 title: Ubuntu24.04虚拟机设置
 date: 2026-08-22
-tags: [教程, 虚拟机, Ubuntu, WSL2, 环境配置]
+tags: [Ubuntu, 编程, Linux]
 summary: Ubuntu 24.04 虚拟机（VMware）的设置教程：系统安装、常用编程环境配置（软件源、Node、Python、Docker）、共享文件夹挂载与虚拟机共享宿主机网络代理。是外卖系统等 WSL2 + Docker 开发环境的基础。
 publish: true
 ---

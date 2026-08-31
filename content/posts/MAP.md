@@ -1,7 +1,7 @@
 ---
 title: 手搓的 Skill——MAP
 date: 2026-08-22
-tags: [agent-skill, 项目地图, 项目维护]
+tags: [MAP, 编程, Agent]
 summary: MAP 是作者自编写的 Skill：通过 /map 召唤 agent 生成项目结构地图 MAP.md，用于快速了解项目结构、定位模块并指导后续开发。它是面向人阅读的项目地图，与面向代码的 Graphify 互补。
 publish: true
 ---

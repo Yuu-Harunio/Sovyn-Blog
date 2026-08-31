@@ -1,7 +1,7 @@
 ---
 title: Skill 推荐
 date: 2026-08-22
-tags: [agent-skill, 索引, 推荐清单]
+tags: [Skill, 编程, Agent]
 summary: 本页是 Agent Skills 目录的索引清单，汇总了 MAP、Graphify、Grill-Me、Firecrawl 四个核心 Skill 的一行简介与跳转链接，便于快速查找。
 publish: true
 ---

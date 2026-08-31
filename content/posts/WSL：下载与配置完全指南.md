@@ -1,7 +1,7 @@
 ---
 title: Windows Subsystem for Linux (WSL)：下载与配置完全指南
 date: 2026-08-23
-tags: [教程, WSL, Linux, Windows, 开发环境, 容器化]
+tags: [WSL, 编程, Linux]
 summary: WSL（Windows Subsystem for Linux）是 Windows 内置的轻量级 Linux 运行环境，让你无需虚拟机即可在 Windows 中运行 Linux 命令行和应用程序。本教程从 WSL 核心概念、系统要求、一键安装与手动配置、WSL 2 切换、常用命令、发行版管理迁移、高级配置到常见问题，覆盖 WSL 从入门到上手的完整流程，是后端开发和容器化开发的基础工具。
 publish: true
 ---

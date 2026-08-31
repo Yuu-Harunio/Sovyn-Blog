@@ -1,7 +1,7 @@
 ---
 title: 剪辑与P图软件选择笔记
 date: 2026-08-23
-tags: [笔记, 软件选择, 剪辑, P图, 性价比, 个人偏好]
+tags: [剪辑, 工具, P图]
 summary: 基于"Win11 / RTX 3060 (6GB) / 16G 内存"配置，从免费、买断、订阅三种付费模式对比 P 图（GIMP / Affinity Photo / PS）、剪辑（剪映 / 达芬奇 / Vegas / Pinnacle / Premiere）与动效软件，并给出按时间顺序的投入路线建议。
 publish: true
 ---
