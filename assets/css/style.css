@@ -24,7 +24,12 @@ body {
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.8;
+  /* 粘性页脚：内容不满一屏时页脚仍贴住视口底部，中间留白 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+body > nav, body > footer { flex-shrink: 0; }
 
 /* ---------- 导航 ---------- */
 .nav {
@@ -265,7 +270,9 @@ body {
 
 /* ---------- 页脚 ---------- */
 footer {
-  border-top: 1px solid var(--line); padding: 36px 0; margin-top: 40px;
+  border-top: 1px solid var(--line); padding: 40px 0 36px;
+  /* 自动占据剩余空间：内容短→推到底部；内容长→正常跟在内容后 */
+  margin-top: auto;
   background: var(--bg-soft);
 }
 .footer-inner {
