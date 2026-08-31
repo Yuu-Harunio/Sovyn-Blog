@@ -69,8 +69,25 @@ function loadPost(file) {
 // 输出统一平铺到 /assets/img/；同名冲突时用上级目录名做前缀
 const IMG_EXT = /\.(png|jpe?g|gif|svg|webp|avif|bmp|ico)$/i;
 
-function collectImages() {
-  const found = walk(CONTENT).filter(f => IMG_EXT.test(f));
+function collectImages(publishedPosts) {
+  // 只拷贝被已发布文章引用的图片：未发布笔记的附件不进入公开站
+  // 匹配依据与渲染时一致：文件名 / 不含扩展名 / 相对路径（![[...]] 或 ![](...) 引用）
+  const refs = new Set();
+  for (const p of publishedPosts) {
+    for (const m of p.raw.matchAll(/!\[[^\]]*\]\(([^)\s]+)[^)]*\)/g)) refs.add(m[1]);
+    for (const m of p.raw.matchAll(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)) refs.add(m[1]);
+  }
+  const refNames = new Set();
+  for (const r of refs) {
+    refNames.add(basename(r));
+    refNames.add(basename(r, extname(r)));
+  }
+  const found = walk(CONTENT).filter(f => {
+    if (!IMG_EXT.test(f)) return false;
+    if (refNames.has(basename(f)) || refNames.has(basename(f, extname(f)))) return true;
+    const rel = relative(CONTENT, f).replace(/\\/g, '/');
+    return refs.has(rel) || refs.has(`/${rel}`) || refs.has(`content/${rel}`);
+  });
   const seen = new Map(); // 输出名(小写) → 源文件，用于冲突检测
   const images = [];     // { file, out, url }
   for (const f of found) {
@@ -377,12 +394,12 @@ function main() {
   const postFiles = walk(join(CONTENT, 'posts')).filter(f => f.endsWith('.md'));
   const all = postFiles.map(loadPost);
 
-  // 收集图片附件：content/ 下所有图片（含「笔记名.assets」文件夹）→ 平铺到 /assets/img/
-  const images = collectImages();
+  // 收集图片附件：仅已发布文章的图片 → 平铺到 /assets/img/
+  const posts = all.filter(p => p.publish);
+  const images = collectImages(posts);
 
   // 仅 publish: true 的文章进入构建；未发布的仍可被 [[]] 感知吗？
   // ——不。未发布 = 完全不存在于公开站，双链会降级为纯文本。
-  const posts = all.filter(p => p.publish);
   const ctx = buildContext(posts, images);
 
   console.log(`  ${all.length} 篇笔记，其中 ${posts.length} 篇标记发布`);

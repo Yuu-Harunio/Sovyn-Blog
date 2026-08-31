@@ -3,7 +3,7 @@ title: Typora 的安装和破解
 date: 2026-08-22
 tags: [Typora, 工具, GitHub]
 summary: Typora 的安装与激活教程：解压安装包 → 运行补丁程序生成序列号 → 激活。配套补丁程序见附件/Typora安装包及补丁.zip，本项目已上传至 GitHub。注意仅支持 Typora 1.9.5 及以前版本。
-publish: true
+publish: false
 ---
 
 # Typora 的安装和破解
