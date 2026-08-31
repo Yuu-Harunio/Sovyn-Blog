@@ -45,6 +45,11 @@ body > nav, body > footer { flex-shrink: 0; }
 .nav-logo {
   font-family: var(--serif); font-size: 20px; font-weight: 700;
   color: var(--ink); text-decoration: none; letter-spacing: .5px;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.logo-icon {
+  width: 28px; height: 28px; border-radius: 8px; display: block;
+  border: 1px solid var(--line);
 }
 .nav-logo em { color: var(--accent); font-style: normal; }
 .nav-links { display: flex; gap: 28px; }

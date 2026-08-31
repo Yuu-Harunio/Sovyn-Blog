@@ -1,7 +1,7 @@
 {
-  "title": "Yanzi.",
+  "title": "Sovyn",
   "author": "Yanzi",
-  "description": "记录与思考，把知识留在自己手里。从 Obsidian 而来的个人知识库。",
+  "description": "个人知识库博客",
   "url": "https://sovyn.eu.cc",
   "hero": {
     "heading": "记录与思考，<br>把知识<span>留在自己手里</span>。",
@@ -11,9 +11,9 @@
     "alt": "暖色调插画：木桌上的笔记本、钢笔与咖啡"
   },
   "footer": {
-    "left": "© 2026 Yanzi · 用 ❤ 与 Markdown 写成",
+    "left": "© 2026 Sovyn · 用 ❤ 与 Markdown 写成",
     "links": [
-      { "label": "GitHub", "url": "https://github.com/" }
+      { "label": "GitHub", "url": "https://github.com/Yuu-Harunio/Sovyn-Blog" }
     ]
   }
 }

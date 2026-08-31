@@ -36,12 +36,13 @@ export function layout(site, { title, desc, active = '', content }) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${escapeHtml(pageTitle)}</title>
 <meta name="description" content="${escapeHtml(desc || site.description)}">
+<link rel="icon" type="image/png" href="/assets/img/icon.png">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="/">${escapeHtml(site.title.replace(/\.$/, ''))}<em>.</em></a>
+    <a class="nav-logo" href="/"><img class="logo-icon" src="/assets/img/icon.png" alt="Sovyn 图标">${escapeHtml(site.title.replace(/\.$/, ''))}<em>.</em></a>
     <div class="nav-links">
       ${navHtml}
     </div>
